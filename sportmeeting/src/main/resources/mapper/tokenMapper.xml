@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyut.sport.mapper.TokenMapper">
+
+    <insert id="SetToken">
+        insert into checktoken (token,useful)values (#{token},1)
+    </insert>
+
+
+    <delete id="DelToken" >
+        DELETE from checktoken where token=#{token}
+    </delete>
+
+    <select id="SelectToken" resultType="com.tyut.sport.pojo.token">
+        select * from checktoken where token = #{token}
+    </select>
+
+</mapper>

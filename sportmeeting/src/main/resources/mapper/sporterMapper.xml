@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyut.sport.mapper.sporterMapper">
+
+    <insert id="addSporter" parameterType="com.tyut.sport.pojo.sporter">
+        INSERT INTO sporter (ID, Name, Gender, College, Phone, Email, Password)
+        VALUES (#{id}, #{name}, #{gender}, #{college}, #{phone}, #{email}, #{password})
+    </insert>
+
+    <update id="modifySporter" parameterType="com.tyut.sport.pojo.sporter">
+        UPDATE sporter
+        SET Name=#{name}, Gender=#{gender}, College=#{college}, Phone=#{phone}, Email=#{email}, Password=#{password}
+        WHERE ID=#{id}
+    </update>
+
+    <delete id="delSporter" parameterType="int">
+        DELETE FROM sporter WHERE ID=#{id}
+    </delete>
+
+    <select id="findSporter" resultType="com.tyut.sport.pojo.sporter">
+        SELECT * from sporter where ID = #{id}
+    </select>
+
+    <select id="getAllSporter" resultType="com.tyut.sport.pojo.sporter">
+        SELECT * from sporter
+    </select>
+
+
+</mapper>

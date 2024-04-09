@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:3306/sport?serverTimezone=UTC"
+    username: sport
+    password: sportmanage
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8899
+
+mybatis:
+  type-aliases-package: com.tyut.sport.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+
+
+config:
+  jwt:
+    # 加密密钥
+    secret: 'fdasfgdsagaxgsregdfdjyghjfhebfdgwe45ygrfbsdfshfdsag'
+    # token有效时长
+    expire: 3600
+    # header 名称
+    header: token

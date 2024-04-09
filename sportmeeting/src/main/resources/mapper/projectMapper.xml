@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyut.sport.mapper.ProjectMapper">
+
+    <select id="SelectAll" resultType="com.tyut.sport.pojo.Project">
+        SELECT * from projects
+    </select>
+
+
+    <insert id="Insert" parameterType="com.tyut.sport.pojo.Project">
+        INSERT INTO projects (name, type, participants, start_time, location, status, referee)
+        VALUES (#{name}, #{type}, #{participants}, #{startTime}, #{location}, #{status}, #{referee})
+    </insert>
+
+
+    <update id="modify" parameterType="com.tyut.sport.pojo.Project">
+        UPDATE projects
+        SET
+            name = #{name},
+            type = #{type},
+            participants = #{participants},
+            start_time = #{startTime},
+            location = #{location},
+            status = #{status},
+            referee = #{referee}
+        WHERE
+            id = #{id}
+    </update>
+
+    <select id="GetOne" resultType="com.tyut.sport.pojo.Project">
+    SELECT * from projects where id = #{ID}
+
+    </select>
+
+    <select id="GetOneByName" resultType="com.tyut.sport.pojo.Project">
+        SELECT * from projects where name = #{name}
+    </select>
+
+    <delete id="Delete" parameterType="java.lang.Integer">
+        delete from projects where id = #{ID}
+    </delete>
+
+
+    <update id="updateProject" parameterType="com.tyut.sport.pojo.Project">
+        UPDATE projects
+        SET
+            name = #{name},
+            type = #{type},
+            participants = #{participants},
+            start_time = #{startTime},
+            location = #{location},
+            status = #{status},
+            referee = #{referee}
+        WHERE
+            id = #{id}
+    </update>
+
+    <select id="GetProjectNameAll" resultType="com.tyut.sport.pojo.ProjectName">
+        select id,name from projects;
+    </select>
+
+    <select id="GetProjectTypeAll" resultType="com.tyut.sport.pojo.ProjectName">
+        select distinct type as name  from projects;
+    </select>
+
+    <select id="getByparam" resultType="com.tyut.sport.pojo.Project">
+        SELECT * FROM projects
+        WHERE 1=1
+        <if test="type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test="name != null and name != ''">
+            AND name = #{name}
+        </if>
+    </select>
+
+</mapper>

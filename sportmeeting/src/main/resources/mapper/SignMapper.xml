@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyut.sport.mapper.SignMapper">
+
+    <delete id="delSignByStu" parameterType="java.lang.Integer">
+        DELETE FROM sign WHERE sporterid = #{id}
+    </delete>
+
+    <!-- Delete by Project ID -->
+    <delete id="delSignByPro" parameterType="java.lang.Integer">
+        DELETE FROM sign WHERE projectid = #{id}
+    </delete>
+
+    <!-- Delete by UUID and PPID -->
+    <delete id="del" parameterType="java.lang.Integer">
+        DELETE FROM sign WHERE sporterid = #{uuid} AND projectid = #{ppid}
+    </delete>
+
+    <!-- Add item -->
+    <insert id="addItem" parameterType="com.tyut.sport.pojo.Sign">
+        INSERT INTO sign(sporterid, sportername, projectid, projectname,colloge,projecttype)
+        VALUES (#{sporterId}, #{sporterName}, #{projectId}, #{projectName},#{colloge},#{projecttype})
+    </insert>
+
+    <!-- Select by Student ID -->
+    <select id="selectByStu" resultType="com.tyut.sport.pojo.Sign">
+        SELECT * FROM sign WHERE sporterid = #{id}
+    </select>
+
+    <select id="selectByAll" resultType="java.lang.Integer">
+        SELECT count(*) from sign where sporterid = #{uuid} and projectid = #{ppid}
+    </select>
+
+    <update id="updateSign" parameterType="com.tyut.sport.pojo.Sign" >
+        UPDATE sign
+        <set>
+            <if test="sporterId != null">
+                sporterId = #{sporterId},
+            </if>
+            <if test="sporterName != null">
+                sporterName = #{sporterName},
+            </if>
+            <if test="projectId != null">
+                projectId = #{projectId},
+            </if>
+            <if test="projectName != null">
+                projectName = #{projectName},
+            </if>
+            <if test="grou != null">
+                grou = #{grou},
+            </if>
+            <if test="which != null">
+                which = #{which},
+            </if>
+            <if test="grade != null">
+                grade = #{grade},
+            </if>
+            <if test="score != null">
+                score = #{score},
+            </if>
+            <if test="projecttype != null">
+                projecttype = #{projecttype},
+            </if>
+        </set>
+        WHERE
+        sporterId = #{sporterId} AND projectId = #{projectId}
+    </update>
+
+    <!-- Select by Project ID -->
+    <select id="selectByPro" resultType="com.tyut.sport.pojo.Sign">
+        SELECT * FROM sign WHERE projectid = #{id}
+    </select>
+
+    <!-- Select all -->
+    <select id="selectAll" resultType="com.tyut.sport.pojo.Sign">
+        SELECT * FROM sign
+    </select>
+
+    <select id="selectByparam" resultType="com.tyut.sport.pojo.Sign">
+        select * from sign
+        WHERE 1=1
+        <if test="type != null and type != ''">
+            AND projecttype = #{type}
+        </if>
+        <if test="name != null and name != ''">
+            AND projectname = #{name}
+        </if>
+    </select>
+
+
+
+
+</mapper>
